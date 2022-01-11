@@ -66,8 +66,11 @@ protected:
 public:
    int Do();
    void ShowRunStatus(const SMTaskRef<StatusLine>&);
+   void LogLee(const char *,...) PRINTF_LIKE(2,3);
    xstring& FormatStatus(xstring&,int,const char *);
    xstring& FormatJobs(xstring&,int verbose,int indent);
+
+   static Ref<Log> transfer_log;
 
    pgetJob(FileCopy *c1,const char *n,int m=0);
    ~pgetJob();

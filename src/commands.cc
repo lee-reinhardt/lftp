@@ -2804,7 +2804,7 @@ CMD(ver)
       _("LFTP | Version %s | Copyright (c) 1996-%d Alexander V. Lukyanov\n"),VERSION,2020);
    printf("\n");
    printf(
-      _("LFTP is free software: you can redistribute it and/or modify\n"
+      _("003 LFTP is free software: you can redistribute it and/or modify\n"
       "it under the terms of the GNU General Public License as published by\n"
       "the Free Software Foundation, either version 3 of the License, or\n"
       "(at your option) any later version.\n"

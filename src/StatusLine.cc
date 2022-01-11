@@ -185,7 +185,8 @@ void StatusLine::update(const char *const *newstr,int newstr_height)
       return;
    }
 
-   int w=GetWidth();
+   // int w=GetWidth();
+   int w=500;
    int mbflags=0;
 
    if(newstr_height>LastHeight)

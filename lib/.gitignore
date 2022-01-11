@@ -364,3 +364,5 @@ limits.h
 /wmemchr-impl.h
 /wmemchr.c
 /wmempcpy.c
+/idx.h
+/nl_langinfo-lock.c

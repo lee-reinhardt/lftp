@@ -245,12 +245,17 @@ void pgetJob::ShowRunStatus(const SMTaskRef<StatusLine>& s)
       return;
    }
 
-   const char *name=SqueezeName(s->GetWidthDelayed()-58);
+   // const char *name=SqueezeName(s->GetWidthDelayed()-58);
+   const char *name=SqueezeName(500);
    off_t size=GetSize();
    StringSet status;
    status.AppendFormat(PGET_STATUS);
+   LogLee(PGET_STATUS);
+   // Log::global->Format(0,"pget_status_debug %s\n",status);
+   // Log::global->Format(0,"pget_status_debug %s\n",xstring::vformat(PGET_STATUS).borrow());
 
-   int w=s->GetWidthDelayed();
+   // int w=s->GetWidthDelayed();
+   int w=500;
    char *bar=string_alloca(w--);
    memset(bar,'+',w);
    bar[w]=0;
@@ -276,6 +281,23 @@ void pgetJob::ShowRunStatus(const SMTaskRef<StatusLine>& s)
    status.Append(bar);
 
    s->Show(status);
+}
+
+Ref<Log> pgetJob::transfer_log;
+
+void pgetJob::LogLee(const char *f,...)
+{
+   const char *log_ctx="xfer";
+   
+   if(!transfer_log)
+      transfer_log=new Log(log_ctx);
+   
+   va_list v;
+   va_start(v,f);
+   // set.append(xstring::vformat(f,v).borrow());
+   // Log::global->Format(0,"pget_status_debug %s\n",xstring::vformat(f,v).borrow());
+   transfer_log->Format(0,"pget_status_debug %s\n",xstring::vformat(f,v).borrow());
+   va_end(v);
 }
 
 // list subjobs (chunk xfers) only when verbose
