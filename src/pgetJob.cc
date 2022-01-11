@@ -245,12 +245,15 @@ void pgetJob::ShowRunStatus(const SMTaskRef<StatusLine>& s)
       return;
    }
 
-   const char *name=SqueezeName(s->GetWidthDelayed()-58);
+   // const char *name=SqueezeName(s->GetWidthDelayed()-58);
+   const char *name=SqueezeName(500);
    off_t size=GetSize();
    StringSet status;
    status.AppendFormat(PGET_STATUS);
+   LogRunStatus(PGET_STATUS);
 
-   int w=s->GetWidthDelayed();
+   // int w=s->GetWidthDelayed();
+   int w=500;
    char *bar=string_alloca(w--);
    memset(bar,'+',w);
    bar[w]=0;
@@ -276,6 +279,21 @@ void pgetJob::ShowRunStatus(const SMTaskRef<StatusLine>& s)
    status.Append(bar);
 
    s->Show(status);
+}
+
+Ref<Log> pgetJob::transfer_log;
+
+void pgetJob::LogRunStatus(const char *f,...)
+{
+   const char *log_ctx="xfer";
+
+   if(!transfer_log)
+      transfer_log=new Log(log_ctx);
+
+   va_list v;
+   va_start(v,f);
+   transfer_log->Format(0,"pget_status_debug %s\n",xstring::vformat(f,v).borrow());
+   va_end(v);
 }
 
 // list subjobs (chunk xfers) only when verbose
